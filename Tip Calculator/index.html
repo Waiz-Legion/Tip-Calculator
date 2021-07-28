@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Tip Calculator</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!--<link rel="stylesheet" href="index.css">-->
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            div#container{
+                position: absolute;
+                transform: translate(-50%, -50%);
+                top: 50%;
+                left: 50%;
+                
+                padding-bottom: 5%;
+                padding-left: 5%;
+                padding-right: 5%;
+                display: block;
+                border-radius: 10%;
+                box-shadow: 5px 5px 10px gray;
+            }
+            
+            div#form-container{
+                text-align: center;
+                padding-bottom: 5%;
+            }
+            
+            form{
+                width: 50vw;
+                font-size: larger;
+                margin-top: 10%;
+                
+                text-align: center;
+            
+            }
+            
+            form input{
+                position: relative;
+                width: 45vw;
+                text-align: center;
+                padding-top: 3%;
+                margin-bottom: 10%;
+                border-style: none;
+                outline: none;
+                border-bottom: 2px solid black;
+                
+            }
+            
+            form input:focus{
+                outline: none;
+            
+            
+            }
+            
+            div#btn{
+                margin-top: 5%;
+                
+            }
+             div#calculate{
+                margin-right: 5%;
+                border-style: none;
+                outline: none;
+             }
+            
+             #res{
+                 
+                 margin-top: 10%;
+                 font-size: larger;
+                 font-weight: bold;
+             }
+            
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id = "form-container">
+                <h2>
+                    Tip Calculator
+                </h2>
+            </div>
+            <div id="footer">
+                <form id="myForm">
+                    <h4>Amount</h4>
+                    <input id="amount" type = "number" placeholder="Enter Amount" />
+                    <h4>No. of Person</h4>
+                    <input id = "noper" type = "number" placeholder="No. of persons" />
+                    <h4>Services</h4>
+                    <select id="opt" onchange="(this.options[this.selectedIndex].value)">
+                        <option value="" selected disabled>--Choose Service Quality--</option>
+                        <option value="0.3">30&#37 - Excellent</option>
+                        <option value="0.2">20&#37 - Very Good</option>
+                        <option value="0.15">15&#37 - Good</option>
+                        <option value="0.10">10&#37 - Average</option>
+                        <option value="0.01">0&#37 - Never Visit Again</option>
+                    </select> <br/>
+                    <div id="btn">
+                        <button id = "calculate" type="button" onclick="calc()">Calculate</button>
+                        <button id="clear" type="button" onclick="reset()">Reset</button>
+                        <div id="res">
+                            <div id="tip">0.00</div>
+                            <small>Rs</small>
+                        </div>
+                    </div><br/>
+                    
+                </form>
+            </div>
+        </div>
+        
+        
+        <script>
+            function calc(){
+    
+                var amount = document.getElementById("amount").value;
+                var totPerson = document.getElementById("noper").value;
+                var QoS = document.getElementById("opt").value;
+                if(QoS == 0){
+                    alert("Select quality of service");
+                    return false;
+                }
+            
+                if(amount == '' || amount <= 0){
+                    alert("Enter correct amount");
+                }
+            
+                if(totPerson == "" || totPerson <= 1){
+                    document.getElementById("tip").style.display = "none";
+                }
+                else{
+                    document.getElementById("tip").style.display = "block";
+                }
+                
+                var total = (amount*QoS)/totPerson;
+                total = total.toFixed(2);
+                document.getElementById('res').style.display = "block";
+                document.getElementById("tip").innerText = total;
+                
+            }
+            
+            
+            
+            function reset(){
+                document.getElementById("tip").style.display = "none";
+                document.getElementsById('myForm').reset();
+                
+            }
+        </script>
+    </body>
+</html>
